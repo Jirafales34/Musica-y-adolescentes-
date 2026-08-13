@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efectos de la música - La música y tú</title>
+    <style>
+        :root {
+            --color-principal: #ff4d8d;
+            --color-secundario: #111827;
+            --color-fondo: #070b14;
+            --color-texto: #f4f7fb;
+            --color-claro: #101827;
+            --color-alerta: #ff6b6b;
+            --color-acento: #4de2ff;
+            --sombra: 0 24px 60px rgba(0, 0, 0, 0.5);
+            --azul: #3b82f6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 77, 141, 0.22), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(77, 226, 255, 0.15), transparent 26%),
+                linear-gradient(180deg, #02070f 0%, #090d18 40%, #0d1322 100%);
+            color: var(--color-texto);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .contenedor { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        header {
+            background: rgba(2, 6, 23, 0.82);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+        }
+        nav {
+            display: flex; justify-content: space-between; align-items: center; padding: 18px 0; gap: 16px; flex-wrap: wrap;
+        }
+        .logo { font-size: 1.3rem; font-weight: 900; color: #ffd6e8; text-decoration: none; text-shadow: 0 0 18px rgba(255, 77, 141, 0.75); }
+        .menu { display: flex; flex-wrap: wrap; gap: 14px; }
+        .menu a {
+            text-decoration: none; color: #e2e8f0; font-weight: 600; transition: color 0.3s, transform 0.3s;
+        }
+        .menu a:hover { color: #ffd6e8; transform: translateY(-2px); text-shadow: 0 0 12px rgba(255, 77, 141, 0.85); }
+        section { padding: 90px 0; }
+        .hero {
+            position: relative;
+            background:
+                linear-gradient(135deg, rgba(10,15,26,0.82), rgba(13,19,34,0.72)),
+                url('./Dj.jpeg') center/cover no-repeat;
+            color: white; padding: 120px 0 80px; text-align: center;
+            box-shadow: inset 0 -40px 80px rgba(0, 0, 0, 0.35); border-bottom: 2px solid rgba(255, 77, 141, 0.25);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255, 77, 141, 0.18), transparent 40%);
+            pointer-events: none;
+        }
+        .hero .contenedor { position: relative; z-index: 1; }
+        .hero h1 { font-size: 2.6rem; margin-bottom: 18px; }
+        .hero p { font-size: 1.1rem; max-width: 760px; margin: 0 auto; opacity: 0.95; }
+        .titulo-seccion { text-align: center; font-size: 2.2rem; margin-bottom: 15px; color: #ffd7ea; font-weight: 900; letter-spacing: 0.5px; text-shadow: 0 0 18px rgba(255, 77, 141, 0.45); }
+        .subtitulo { text-align: center; max-width: 760px; margin: 0 auto 44px; color: #cbd5e1; font-size: 1.05rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+        .tarjeta {
+            background: linear-gradient(145deg, rgba(17,24,39,0.95), rgba(22,32,52,0.8));
+            padding: 30px; border-radius: 24px; box-shadow: 0 18px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+        .tarjeta::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff4d8d, #4de2ff, transparent);
+        }
+        .riesgos-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 28px 18px;
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.82);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: var(--sombra);
+        }
+        .riesgos-side {
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            width: 260px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 22px;
+            box-shadow: 0 18px 36px rgba(0,0,0,0.28);
+            border: 1px solid rgba(255,255,255,0.14);
+            z-index: 0;
+        }
+        .riesgos-side.left {
+            left: 14px;
+            background-image: linear-gradient(90deg, rgba(8,12,20,0.25), rgba(8,12,20,0.08)), url('./Nina.jpg');
+        }
+        .riesgos-side.right {
+            right: 14px;
+            background-image: linear-gradient(270deg, rgba(8,12,20,0.25), rgba(8,12,20,0.08)), url('./Hendrix.jpg');
+        }
+        .riesgos-wrapper .grid {
+            position: relative;
+            z-index: 1;
+            margin: 0 270px;
+        }
+        .impacto-positivo {
+            background:
+                linear-gradient(135deg, rgba(8, 12, 20, 0.78), rgba(15, 23, 42, 0.88)),
+                url('./Jazz.jpeg') center/cover no-repeat;
+            border-radius: 24px;
+            padding: 32px 26px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: var(--sombra);
+        }
+        .tarjeta h3 { color: #ddd6fe; margin-bottom: 12px; }
+        .tarjeta p { color: #e2e8f0; }
+        .positiva { border-top: 4px solid #22c55e; }
+        .negativa { border-top: 4px solid var(--color-alerta); }
+        .resumen {
+            margin: 0 auto 18px;
+            max-width: 820px;
+            padding: 20px 22px;
+            border-radius: 18px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(191, 219, 254, 0.15);
+            color: #e2e8f0;
+            font-size: 1.02rem;
+        }
+        .boton {
+            display: inline-block; background: linear-gradient(90deg, #ff4d8d 0%, #4de2ff 100%); color: #050b14;
+            padding: 15px 34px; border-radius: 999px; text-decoration: none; font-weight: 900; margin-top: 24px;
+            box-shadow: 0 0 22px rgba(255, 77, 141, 0.35);
+        }
+        footer {
+            background: rgba(2, 6, 23, 0.95); color: #f8fafc; text-align: center;
+            padding: 34px 0; border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.1rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="contenedor">
+            <nav>
+                <a href="index.html" class="logo">Música & Salud Mental</a>
+                <div class="menu">
+                    <a href="index.html">Inicio</a>
+                    <a href="efectos.html">Efectos</a>
+                    <a href="salud-mental.html">Salud Mental</a>
+                    <a href="generos.html">Géneros</a>
+                    <a href="consejos.html">Consejos</a>
+                    <a href="guia-padres.html">Guía para padres</a>
+                    <a href="recursos.html">Recursos</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="contenedor">
+            <h1>Efectos de la música en adolescentes</h1>
+            <p>La música influye en la identidad, el humor, la manera de relacionarse y la forma en que los jóvenes procesan sus emociones.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Impacto positivo</h2>
+            <p class="subtitulo">Cuando se usa con intención, la música puede fortalecer la autoestima, la expresión y la motivación.</p>
+
+            <div class="resumen">
+                La música tiene un papel relevante en la regulación emocional y en la construcción de identidad durante la adolescencia. Además de ser una experiencia cultural, puede funcionar como herramienta de autorregulación, expresión y conexión social cuando se usa de manera equilibrada.
+            </div>
+
+            <div class="grid impacto-positivo">
+                <div class="tarjeta positiva">
+                    <h3>Identidad y pertenencia</h3>
+                    <p>Los jóvenes usan la música para explorar quiénes son y sentirse parte de una comunidad o grupo social. Las canciones, artistas y géneros suelen actuar como referentes simbólicos de identidad y conexión con su entorno.</p>
+                </div>
+                <div class="tarjeta positiva">
+                    <h3>Expresión emocional</h3>
+                    <p>Permite canalizar emociones difíciles con una forma creativa y comprensible. Escuchar música que refleja estados emocionales puede ayudar a reconocer sentimientos y a procesarlos con menos intensidad.</p>
+                </div>
+                <div class="tarjeta positiva">
+                    <h3>Motivación y rendimiento</h3>
+                    <p>Puede impulsar la energía para estudiar, entrenar o enfrentar tareas con más ánimo. En ciertos contextos, la música aumenta la atención, la concentración y la sensación de energía, especialmente cuando se elige de forma intencional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: var(--color-claro);">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Riesgos a considerar</h2>
+            <p class="subtitulo">No todo el contenido musical es neutro. Hay factores que pueden influir negativamente si se consumen sin equilibrio.</p>
+
+            <div class="resumen">
+                El impacto depende del tipo de música, del volumen, del contexto de escucha y de la frecuencia con la que se consume. La música puede apoyar el bienestar, pero también reforzar mensajes poco saludables si no se ejercita criterio ni mediación emocional.
+            </div>
+
+            <div class="riesgos-wrapper">
+                <div class="riesgos-side left"></div>
+                <div class="riesgos-side right"></div>
+                <div class="grid">
+                    <div class="tarjeta negativa">
+                        <h3>Contenido sensible</h3>
+                        <p>Algunas letras pueden reforzar violencia, consumo de drogas o mensajes de desesperanza. Cuando los jóvenes se identifican con esos contenidos, pueden internalizar patrones poco saludables.</p>
+                    </div>
+                    <div class="tarjeta negativa">
+                        <h3>Aislamiento y dependencia</h3>
+                        <p>Escuchar música demasiado tiempo con auriculares puede reducir la conexión real con otras personas. También puede aparecer una dependencia emocional a ciertos artistas o canciones como forma de regulación afectiva.</p>
+                    </div>
+                    <div class="tarjeta negativa">
+                        <h3>Daño auditivo</h3>
+                        <p>El volumen alto y constante puede producir problemas auditivos con el tiempo. Además, la exposición prolongada al sonido excesivo afecta la salud auditiva y la concentración.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="contenedor" style="padding-bottom: 60px; text-align: center;">
+        <a href="index.html" class="boton">Volver al inicio</a>
+    </div>
+
+    <footer>
+        <div class="contenedor">
+            <p>© 2026 Música, Adolescentes y Salud Mental</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,837 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Música, Adolescentes y Salud Mental</title>
+    <style>
+        :root {
+            --color-principal: #ff4d8d;
+            --color-secundario: #111827;
+            --color-fondo: #070b14;
+            --color-texto: #f4f7fb;
+            --color-claro: #101827;
+            --color-alerta: #ff6b6b;
+            --color-acento: #4de2ff;
+            --sombra: 0 24px 60px rgba(0, 0, 0, 0.5);
+            --azul: #3b82f6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 77, 141, 0.22), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(77, 226, 255, 0.15), transparent 26%),
+                linear-gradient(180deg, #02070f 0%, #090d18 40%, #0d1322 100%);
+            color: var(--color-texto);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        a { color: inherit; }
+        .contenedor { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background: rgba(2, 6, 23, 0.82);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #ffd6e8;
+            text-decoration: none;
+            text-shadow: 0 0 18px rgba(255, 77, 141, 0.75);
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .menu a:hover {
+            color: #ffd6e8;
+            transform: translateY(-2px);
+            text-shadow: 0 0 12px rgba(255, 77, 141, 0.85);
+        }
+
+        .hero {
+            background:
+                radial-gradient(circle at top, rgba(255, 77, 141, 0.18), transparent 30%),
+                linear-gradient(135deg, #0a0f1a 0%, #0d1322 35%, #131b2e 100%);
+            color: white;
+            padding: 130px 0 90px;
+            text-align: center;
+            box-shadow: inset 0 -40px 80px rgba(0, 0, 0, 0.35);
+            border-bottom: 2px solid rgba(255, 77, 141, 0.25);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        .boton {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff4d8d 0%, #4de2ff 100%);
+            color: #050b14;
+            padding: 15px 34px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 900;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 22px rgba(255, 77, 141, 0.35);
+        }
+
+        .boton:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 0 26px rgba(77, 226, 255, 0.5);
+        }
+
+        section { padding: 90px 0; }
+        .titulo-seccion {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #ffd7ea;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 18px rgba(255, 77, 141, 0.45);
+        }
+
+        .subtitulo {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 50px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .section-block { margin-top: 32px; }
+        .mini-titulo {
+            color: #ff9ec5;
+            font-size: 1.7rem;
+            margin: 0 0 22px;
+            font-weight: 800;
+        }
+
+        .historia-timeline {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 12px;
+        }
+
+        .historia-timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(94, 234, 212, 0.9), rgba(147, 197, 253, 0.6), rgba(255, 77, 141, 0.18));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: calc(50% - 28px);
+            margin-bottom: 24px;
+        }
+
+        .timeline-item:nth-child(odd) { left: 0; }
+        .timeline-item:nth-child(even) { margin-left: 50%; }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            top: 26px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4d8d, #4de2ff);
+            box-shadow: 0 0 0 4px rgba(77, 226, 255, 0.12);
+        }
+
+        .timeline-item:nth-child(odd)::before { right: -36px; }
+        .timeline-item:nth-child(even)::before { left: -36px; }
+
+        .timeline-card {
+            background: rgba(15, 23, 42, 0.62);
+            border: 1px solid rgba(147, 197, 253, 0.18);
+            border-radius: 18px;
+            padding: 20px 20px 18px;
+            box-shadow: 0 14px 28px rgba(2, 6, 23, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #93c5fd;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .timeline-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            font-weight: 700;
+        }
+
+        .timeline-card p {
+            margin: 0;
+            color: #dbeafe;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .tarjeta, .paso, .genero {
+            height: 100%;
+        }
+
+        .tarjeta {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(22, 32, 52, 0.8) 100%);
+            padding: 28px 24px;
+            border-radius: 22px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            border: 1px solid rgba(255, 77, 141, 0.18);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            color: #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tarjeta::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff4d8d, #4de2ff, transparent);
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3), 0 0 24px rgba(255, 77, 141, 0.12);
+            border-color: rgba(77, 226, 255, 0.35);
+        }
+
+        .tarjeta h3 { color: #ddd6fe; margin-bottom: 12px; font-size: 1.25rem; font-weight: 700; }
+
+        #historia, #efectos, #fuentes { position: relative; overflow: hidden; }
+        #historia {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.18) 0%, rgba(2, 6, 23, 0.95) 100%);
+        }
+
+        #efectos {
+            position: relative;
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.8) 0%, rgba(15, 23, 42, 0.96) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        #efectos .video-fondo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.1;
+            filter: saturate(1.1) contrast(1.08);
+            z-index: 0;
+        }
+
+        #efectos .contenedor { position: relative; z-index: 1; }
+        .efecto-cita {
+            margin: 0 auto 26px;
+            max-width: 760px;
+            text-align: center;
+            color: #dbeafe;
+            font-size: 0.96rem;
+            line-height: 1.7;
+            opacity: 0.92;
+        }
+
+        .positivo { border-left: 3px solid #34d399; background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(17, 24, 39, 0.96)); }
+        .negativo { border-left: 3px solid var(--color-alerta); background: linear-gradient(135deg, rgba(255, 77, 109, 0.12), rgba(17, 24, 39, 0.96)); }
+
+        .alerta {
+            background: linear-gradient(135deg, rgba(255, 93, 115, 0.18) 0%, rgba(255, 93, 115, 0.08) 100%);
+            border: 1px solid rgba(255, 93, 115, 0.35);
+            border-left: 6px solid var(--color-alerta);
+            padding: 22px 26px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            color: #fef2f2;
+            box-shadow: 0 12px 28px rgba(255, 93, 115, 0.12);
+            font-weight: 600;
+        }
+
+        .genero {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.75));
+            padding: 26px 22px;
+            border-radius: 20px;
+            text-align: left;
+            color: #e5e7eb;
+            border: 1px solid rgba(77, 226, 255, 0.18);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.18);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .genero:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 77, 141, 0.4);
+        }
+
+        .genero h3 {
+            color: var(--color-principal);
+            margin-bottom: 10px;
+        }
+
+        .genero iframe {
+            width: 100%;
+            max-width: 100%;
+            margin-top: 14px;
+            border-radius: 12px;
+        }
+
+        .pasos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .paso {
+            background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+            padding: 28px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            color: #e5e7eb;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .numero {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--color-principal);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .recursos {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.16) 0%, rgba(2, 6, 23, 0.96) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .recursos .contenedor > div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .recursos a {
+            display: inline-block;
+            margin: 6px 0;
+            padding: 13px 22px;
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 700;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.20);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+        }
+
+        .recursos a:hover {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .imagen-ejemplo {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px auto 0;
+            box-shadow: var(--sombra);
+        }
+
+        .salud-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+        }
+
+        .salud-tarjeta {
+            background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 30px 24px;
+            box-shadow: var(--sombra);
+        }
+
+        .salud-tarjeta h3 { color: #bfdbfe; margin-bottom: 12px; }
+        .salud-tarjeta p { color: #e5e7eb; }
+
+        .guia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .guia-item {
+            background: rgba(15, 23, 42, 0.88);
+            border-radius: 24px;
+            padding: 28px 24px;
+            box-shadow: var(--sombra);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .guia-item h3 { color: #bfdbfe; margin-bottom: 12px; }
+        .guia-item p, .guia-item ul { color: #cbd5e1; }
+
+        .guia-item ul { margin-left: 18px; }
+
+        #fuentes {
+            background: rgba(2, 6, 23, 0.5);
+            padding-top: 60px;
+        }
+
+        #fuentes .tarjeta {
+            max-width: 960px;
+            margin: 8px auto 0;
+            padding: 10px 12px 6px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.06);
+            background: rgba(15, 23, 42, 0.12);
+            box-shadow: none;
+        }
+
+        #fuentes .tarjeta h3 {
+            margin-bottom: 6px;
+            font-size: 0.64rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #dbeafe;
+            font-weight: 700;
+        }
+
+        #fuentes .tarjeta ul {
+            margin-left: 14px;
+            font-size: 0.68rem;
+            line-height: 1.45;
+            color: #e2e8f0;
+        }
+
+        #fuentes .tarjeta li {
+            margin-bottom: 5px;
+            padding-left: 1px;
+        }
+
+        #fuentes .tarjeta a {
+            color: #bfdbfe;
+            text-decoration: none;
+        }
+
+        #fuentes .tarjeta a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: rgba(2, 6, 23, 0.95);
+            padding: 24px 0;
+            text-align: center;
+            color: #dbeafe;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 760px) {
+            .historia-timeline::before { left: 22px; transform: none; }
+            .timeline-item {
+                width: calc(100% - 40px);
+                margin-left: 40px;
+                margin-right: 0;
+            }
+            .timeline-item:nth-child(even) { margin-left: 40px; }
+            .timeline-item::before { left: -28px; right: auto; }
+            .menu { width: 100%; justify-content: center; }
+            .hero { padding: 100px 0 70px; }
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 70px 0; }
+            .grid, .pasos, .salud-grid, .guia-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="contenedor">
+            <nav>
+                <a href="#inicio" class="logo">Música & Salud Mental</a>
+                <div class="menu">
+                    <a href="#historia">Historia</a>
+                    <a href="#efectos">Efectos</a>
+                    <a href="#salud-mental">Salud mental</a>
+                    <a href="#generos">Géneros</a>
+                    <a href="#consejos">Consejos</a>
+                    <a href="#guia-padres">Guía para padres</a>
+                    <a href="#recursos">Recursos</a>
+                    <a href="#fuentes">Fuentes</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="contenedor">
+            <h1>Música, Adolescentes y Salud Mental</h1>
+            <p>La música es mucho más que entretenimiento. Descubre cómo influye en las emociones, la identidad y el bienestar mental de los jóvenes.</p>
+            <a href="#historia" class="boton">Explorar el tema</a>
+            <img class="imagen-ejemplo" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80" alt="Personas escuchando música">
+        </div>
+    </section>
+
+    <section id="historia">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Historia de la música</h2>
+            <p class="subtitulo">Un eje central para entender cómo la música ha evolucionado, influido en la cultura y acompañado el desarrollo humano a lo largo del tiempo.</p>
+
+            <div class="historia-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Prehistoria</div>
+                        <h3>Ritmos primitivos</h3>
+                        <p>La música nace con flautas de hueso, percusiones y ritmos rituales ligados a la comunidad, la celebración y la espiritualidad.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Antigüedad</div>
+                        <h3>Egipto, Grecia y Roma</h3>
+                        <p>En estas civilizaciones la música se vinculó con la religión, la filosofía, el teatro y las matemáticas, consolidando su valor cultural.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Edad Media</div>
+                        <h3>Canto sagrado</h3>
+                        <p>Se impone el canto gregoriano y, más adelante, la polifonía, transformando la música en una forma de expresión litúrgica y estructural.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Renacimiento</div>
+                        <h3>Expansión y riqueza</h3>
+                        <p>Se desarrollan la polifonía vocal, la música instrumental y nuevas formas de composición, ampliando su alcance artístico.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Barroco y Clasicismo</div>
+                        <h3>Forma y expresión</h3>
+                        <p>Nacen la ópera, la sinfonía y el equilibrio formal con figuras como Bach, Mozart y Beethoven, que marcan la tradición occidental.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Romanticismo y actualidad</div>
+                        <h3>Emoción y diversidad</h3>
+                        <p>El Romanticismo intensifica la expresividad emocional y, en la actualidad, la música se diversifica en jazz, rock, pop, electrónica y globalización.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="efectos">
+        <video class="video-fondo" src="./luces.mp4" autoplay muted loop playsinline></video>
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Efectos de la música en adolescentes</h2>
+            <p class="efecto-cita">La evidencia revisada indica que la música no solo acompaña las emociones, sino que también puede modular el ánimo, la identidad y la regulación emocional de los adolescentes (Cowen et al., 2020; Zentner et al., 2008; Saarikallio, 2008).</p>
+            <p class="subtitulo">La música puede fortalecer el bienestar emocional, pero también tiene riesgos cuando se usa sin equilibrio o con contenido perjudicial.</p>
+
+            <div class="section-block">
+                <h3 class="mini-titulo">Impacto positivo</h3>
+                <div class="grid">
+                    <div class="tarjeta positiva">
+                        <h3>Identidad y pertenencia</h3>
+                        <p>Los jóvenes usan la música para construir identidad y sentirse conectados con su grupo; estudios sobre experiencias musicales muestran que la música organiza emociones y vínculos sociales de manera muy personal (Cowen et al., 2020; Saarikallio &amp; Erkkilä, 2007).</p>
+                    </div>
+                    <div class="tarjeta positiva">
+                        <h3>Expresión emocional</h3>
+                        <p>La música permite externalizar estados de ánimo intensos y facilitar la comprensión emocional. La literatura de las emociones evocadas por la música destaca que ciertos patrones sonoros activan respuestas afectivas específicas (Zentner et al., 2008; Juslin &amp; Västfjäll, 2008).</p>
+                    </div>
+                    <div class="tarjeta positiva">
+                        <h3>Motivación</h3>
+                        <p>Cuando se selecciona de forma consciente, la música puede apoyar la regulación emocional y la energía para afrontar tareas, estudio o actividad física; este uso funcional aparece en estudios sobre estrategias de autorregulación musical en adolescentes (Cook et al., 2019; Saarikallio, 2008).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h3 class="mini-titulo">Riesgos a considerar</h3>
+                <div class="grid">
+                    <div class="tarjeta negativa">
+                        <h3>Contenido sensible</h3>
+                        <p>Las letras con violencia, consumo o desesperanza pueden reforzar estados emocionales negativos. La investigación sobre regulación emocional sugiere que algunas elecciones musicales pueden intensificar más bien que calmar la experiencia afectiva (Carlson et al., 2015; Cook et al., 2019).</p>
+                    </div>
+                    <div class="tarjeta negativa">
+                        <h3>Aislamiento y dependencia</h3>
+                        <p>El uso excesivo de la música como refugio puede dejar de lado la interacción social y prolongar estados de ánimo de forma poco saludable. Los estudios muestran que la regulación musical funciona mejor cuando es adaptativa y equilibrada, no compulsiva (Saarikallio, 2008; Carlson et al., 2015).</p>
+                    </div>
+                    <div class="tarjeta negativa">
+                        <h3>Daño auditivo</h3>
+                        <p>El volumen elevado y prolongado puede afectar la audición y, a su vez, empeorar la sensibilidad al estrés y la sensación de fatiga. Aunque este efecto no es el eje principal de la literatura emocional, sí es un riesgo físico relevante en el consumo intensivo de música.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="salud-mental" style="background: var(--color-claro);">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Música y salud mental</h2>
+            <p class="subtitulo">La música puede ser una herramienta útil para regular emociones, disminuir el estrés y apoyar la concentración, siempre con equilibrio.</p>
+
+            <div class="salud-grid">
+                <div class="salud-tarjeta">
+                    <h3>Reduce el estrés</h3>
+                    <p>Disminuye la sensación de presión y ayuda a calmar la mente en momentos de ansiedad.</p>
+                </div>
+                <div class="salud-tarjeta">
+                    <h3>Mejora el ánimo</h3>
+                    <p>Puede generar dopamina y mejorar el estado emocional en momentos difíciles.</p>
+                </div>
+                <div class="salud-tarjeta">
+                    <h3>Procesa emociones</h3>
+                    <p>Ayuda a conectar con sentimientos que a veces no se expresan con palabras.</p>
+                </div>
+                <div class="salud-tarjeta">
+                    <h3>Mejora la concentración</h3>
+                    <p>La música instrumental o lo-fi puede apoyar la atención en tareas de estudio o lectura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="generos">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Géneros más escuchados por adolescentes</h2>
+            <p class="subtitulo">Cada género puede tener diferentes efectos según el contenido y el contexto.</p>
+
+            <div class="grid">
+                <div class="genero">
+                    <h3>Reggaetón / Urbano</h3>
+                    <p>Muy popular. Influye en el baile, el lenguaje y las relaciones.</p>
+                    <iframe src="https://open.spotify.com/embed/playlist/3Hk12y4P3EHwskHynJyHfB?utm_source=generator&si=5e9febbf6e10468e" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="genero">
+                    <h3>Pop / K-Pop</h3>
+                    <p>Genera comunidades fuertes y puede motivar la autoestima.</p>
+                    <iframe src="https://open.spotify.com/embed/playlist/1JBLIl4K5z4ClpCLDatpuy?utm_source=generator&si=922e13e8d45d4ff1" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="genero">
+                    <h3>Trap / Hip-Hop</h3>
+                    <p>Refleja realidades urbanas. Puede empoderar o normalizar conductas de riesgo.</p>
+                    <iframe src="https://open.spotify.com/embed/playlist/32v9qwLsSj4xjH1GyeZ7nm?utm_source=generator&si=35618eb3f3b24e85" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="genero">
+                    <h3>Rock / Indie</h3>
+                    <p>Ayuda a canalizar emociones intensas y desarrollar pensamiento crítico.</p>
+                    <iframe src="https://open.spotify.com/embed/playlist/3qun320wqm20KMGc4WniYe?utm_source=generator&si=0db70beb02464a6c" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="genero">
+                    <h3>Electrónica</h3>
+                    <p>Asociada a energía y fiestas. Puede afectar los patrones de sueño.</p>
+                    <iframe src="https://open.spotify.com/embed/playlist/52wknKn1tt23swwK2LmAFu?utm_source=generator&si=3d38fe4006ab47d4" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="genero">
+                    <h3>Lo-fi / Clásica</h3>
+                    <p>Ideal para estudiar, relajarse y reducir la ansiedad.</p>
+                    <iframe src="https://open.spotify.com/embed/playlist/29nPMwMfVGUeZCBpBUVpjK?utm_source=generator&si=f9fd31a29ad94031" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="consejos" style="background: var(--color-claro);">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Consejos para un consumo saludable</h2>
+            <p class="subtitulo">Pequeños cambios pueden potenciar los beneficios de la música y reducir los riesgos.</p>
+
+            <div class="pasos">
+                <div class="paso">
+                    <div class="numero">1</div>
+                    <h3>Elige conscientemente</h3>
+                    <p>Pregúntate cómo quieres sentirte y elige la música según esa necesidad.</p>
+                </div>
+                <div class="paso">
+                    <div class="numero">2</div>
+                    <h3>Cuida el volumen</h3>
+                    <p>Regla 60/60: máximo 60% del volumen durante 60 minutos seguidos.</p>
+                </div>
+                <div class="paso">
+                    <div class="numero">3</div>
+                    <h3>Varía los estilos</h3>
+                    <p>No te limites a un solo género. La variedad enriquece la experiencia.</p>
+                </div>
+                <div class="paso">
+                    <div class="numero">4</div>
+                    <h3>Combínala con otras actividades</h3>
+                    <p>Úsala mientras caminas, dibujas, escribes o haces ejercicio.</p>
+                </div>
+                <div class="paso">
+                    <div class="numero">5</div>
+                    <h3>Habla de lo que sientes</h3>
+                    <p>Comparte canciones y conversa sobre las emociones que te generan.</p>
+                </div>
+                <div class="paso">
+                    <div class="numero">6</div>
+                    <h3>Observa tu estado de ánimo</h3>
+                    <p>Si una canción te genera malestar profundo, cámbiala o busca apoyo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="guia-padres" style="background: #f8fbff; color: #0f172a;">
+        <div class="contenedor">
+            <h2 class="titulo-seccion" style="color:#0f172a; text-shadow:none;">Guía para padres y cuidadores</h2>
+            <p class="subtitulo" style="color:#334155;">Una guía práctica para acompañar a los adolescentes en un consumo saludable de la música.</p>
+
+            <div class="guia-grid">
+                <div class="guia-item">
+                    <h3>Habla con ellos</h3>
+                    <p>Pregunta qué escuchan, por qué lo eligen y cómo les hace sentir.</p>
+                </div>
+                <div class="guia-item">
+                    <h3>Establece límites</h3>
+                    <p>Fija horarios para escuchar música, evita volúmenes muy altos y promueve pausas para descansar.</p>
+                </div>
+                <div class="guia-item">
+                    <h3>Guía el contenido</h3>
+                    <p>Ayuda a identificar letras que normalicen violencia, consumo de drogas o mensajes de desesperanza.</p>
+                </div>
+                <div class="guia-item">
+                    <h3>Promueve el equilibrio</h3>
+                    <p>Combina la música con actividades físicas, sociales y de estudio para fortalecer el bienestar general.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recursos" id="recursos">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Recursos útiles</h2>
+            <p class="subtitulo">Enlaces y herramientas recomendadas para apoyar a los jóvenes y a sus familias.</p>
+
+            <div>
+                <a href="https://open.spotify.com/playlist/29nPMwMfVGUeZCBpBUVpjK?utm_source=generator&si=f9fd31a29ad94031" target="_blank">Playlist para relajarse</a>
+                <a href="#generos" target="_blank">Géneros musicales</a>
+                <a href="#salud-mental" target="_blank">Salud mental</a>
+                <a href="#consejos" target="_blank">Consejos</a>
+                <a href="#guia-padres" target="_blank">Guía para padres</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="fuentes">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Fuentes</h2>
+
+            <div class="tarjeta">
+                <h3>Música, emociones y regulación del ánimo</h3>
+                <ul>
+                    <li><strong>Cowen, A. S., Fang, X., Sauter, D., &amp; Keltner, D. (2020).</strong> What music makes us feel: At least 13 dimensions organize subjective experiences associated with music across different cultures. <em>Proceedings of the National Academy of Sciences, 117</em>(4), 1924–1934. <a href="https://doi.org/10.1073/pnas.1910704117" target="_blank">https://doi.org/10.1073/pnas.1910704117</a></li>
+                    <li><strong>Zentner, M., Grandjean, D., &amp; Scherer, K. R. (2008).</strong> Emotions evoked by the sound of music: Characterization, classification, and measurement. <em>Emotion, 8</em>(4), 494–521. <a href="https://doi.org/10.1037/1528-3542.8.4.494" target="_blank">https://doi.org/10.1037/1528-3542.8.4.494</a></li>
+                    <li><strong>Juslin, P. N., &amp; Västfjäll, D. (2008).</strong> Emotional responses to music: The need to consider underlying mechanisms. <em>Behavioral and Brain Sciences, 31</em>(5), 559–575.</li>
+                </ul>
+            </div>
+
+            <div class="tarjeta">
+                <h3>Regulación emocional en adolescentes</h3>
+                <ul>
+                    <li><strong>Saarikallio, S. (2008).</strong> Music as mood regulation in adolescence. <em>Jyväskylä Studies in Humanities, 67</em>. University of Jyväskylä.</li>
+                    <li><strong>Saarikallio, S., &amp; Erkkilä, J. (2007).</strong> The role of music in adolescents’ mood regulation. <em>Psychology of Music, 35</em>(1), 88–109.</li>
+                    <li><strong>Cook, T., Roy, A. R. K., &amp; Welker, K. M. (2019).</strong> Music as an emotion regulation strategy. <em>Psychology of Music, 47</em>(1), 144–154. <a href="https://doi.org/10.1177/0305735617734627" target="_blank">https://doi.org/10.1177/0305735617734627</a></li>
+                </ul>
+            </div>
+
+            <div class="tarjeta">
+                <h3>Historia de la música</h3>
+                <ul>
+                    <li><strong>Grout, D. J., &amp; Palisca, C. V.</strong> <em>A History of Western Music</em>. W. W. Norton.</li>
+                    <li><strong>Taruskin, R.</strong> <em>The Oxford History of Western Music</em>. Oxford University Press.</li>
+                    <li><a href="https://es.wikipedia.org/wiki/Historia_de_la_m%C3%BAsica" target="_blank">Historia de la música (Wikipedia)</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contenedor">
+            <p>© 2026 Música, Adolescentes y Salud Mental • Página educativa</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía para padres - La música y tú</title>
+    <style>
+        :root {
+            --color-principal: #ff4d8d;
+            --color-secundario: #111827;
+            --color-fondo: #070b14;
+            --color-card: rgba(15, 23, 42, 0.88);
+            --color-texto: #f4f7fb;
+            --color-muted: #cbd5e1;
+            --color-bien: #34d399;
+            --color-alerta: #fb7185;
+            --sombra: 0 24px 60px rgba(0, 0, 0, 0.38);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 77, 141, 0.22), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(77, 226, 255, 0.15), transparent 26%),
+                linear-gradient(180deg, #02070f 0%, #090d18 40%, #0d1322 100%);
+            color: var(--color-texto);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 20px 80px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(10,15,26,0.82), rgba(13,19,34,0.72));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            padding: 34px 30px;
+            box-shadow: var(--sombra);
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255, 77, 141, 0.18), transparent 40%);
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #bfdbfe;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        h1 {
+            color: #dbeafe;
+            margin-bottom: 18px;
+            font-size: clamp(2.1rem, 4vw, 3.3rem);
+            line-height: 1.15;
+        }
+
+        .intro {
+            max-width: 760px;
+            color: var(--color-muted);
+            font-size: 1.08rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+            margin: 28px 0;
+        }
+
+        .tarjeta {
+            background: var(--color-card);
+            border-radius: 24px;
+            padding: 28px 24px;
+            box-shadow: var(--sombra);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .tarjeta h3 {
+            color: #bfdbfe;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+
+        .tarjeta p,
+        ul {
+            color: var(--color-muted);
+            font-size: 0.98rem;
+        }
+
+        ul {
+            margin-left: 22px;
+            margin-top: 8px;
+        }
+
+        .highlight {
+            border-left: 5px solid var(--color-principal);
+        }
+
+        .warning {
+            border-left: 5px solid var(--color-alerta);
+        }
+
+        .lista-rapida {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .check {
+            background: rgba(17, 24, 39, 0.72);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 18px 20px;
+            color: var(--color-muted);
+        }
+
+        .check strong {
+            color: #dbeafe;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .acciones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 14px 24px;
+            background: linear-gradient(90deg, #ff4d8d 0%, #4de2ff 100%);
+            color: #050b14;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 900;
+            box-shadow: 0 0 22px rgba(255, 77, 141, 0.35);
+            transition: transform 0.2s ease;
+        }
+
+        .boton:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secundario {
+            background: rgba(255,255,255,0.05);
+            color: var(--color-texto);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .mini-titulo {
+            color: #ffd7ea;
+            margin: 32px 0 12px;
+            font-size: 1.6rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 26px 20px;
+            }
+
+            .tarjeta {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="hero">
+            <div class="eyebrow">Guía educativa</div>
+            <h1>Guía para padres y cuidadores</h1>
+            <p class="intro">
+                La música puede ser una excelente herramienta de expresión, calma, motivación y conexión emocional para los adolescentes.
+                Sin embargo, como cualquier influencia poderosa, necesita orientación, límites saludables y acompañamiento consciente.
+            </p>
+        </div>
+
+        <section class="section-block">
+            <h2 class="mini-titulo">1. Habla con ellos con curiosidad</h2>
+            <div class="grid">
+                <div class="tarjeta highlight">
+                    <h3>Escucha sin juzgar</h3>
+                    <p>En lugar de criticar el género o el artista, pregúntales qué les gusta y por qué les conecta con esa música.</p>
+                </div>
+                <div class="tarjeta highlight">
+                    <h3>Busca el significado</h3>
+                    <p>Muchos adolescentes eligen canciones por cómo les hacen sentir. Entender la emoción es más útil que solo revisar la letra.</p>
+                </div>
+                <div class="tarjeta highlight">
+                    <h3>Crea espacio para conversar</h3>
+                    <p>Preguntas simples como “¿qué te transmite esta canción?” pueden abrir conversaciones profundas sobre tristeza, alegría o ansiedad.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="mini-titulo">2. Guía el contenido que escuchan</h2>
+            <div class="grid">
+                <div class="tarjeta highlight">
+                    <h3>Identifica mensajes</h3>
+                    <p>Hay canciones que pueden normalizar violencia, consumo de sustancias o pensamientos de desesperanza. No es solo el ritmo, también importa el mensaje.</p>
+                </div>
+                <div class="tarjeta highlight">
+                    <h3>Fomenta el análisis crítico</h3>
+                    <p>Ayuda a los jóvenes a preguntarse: “¿Qué quiere comunicar esta canción? ¿Es una idea sana o problemática?”</p>
+                </div>
+                <div class="tarjeta highlight">
+                    <h3>Promueve música con sentido</h3>
+                    <p>La música puede ser también un lugar de identidad, creatividad y fortaleza emocional. Invita a explorar temas con mensajes más positivos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="mini-titulo">3. Establece límites saludables</h2>
+            <div class="grid">
+                <div class="tarjeta highlight">
+                    <h3>Horario y pausas</h3>
+                    <p>Fijar tiempos de escucha y dar pausas ayuda a equilibrar la música con el estudio, el descanso y la vida social.</p>
+                </div>
+                <div class="tarjeta highlight">
+                    <h3>Volumen adecuado</h3>
+                    <p>Un volumen sostenido y alto puede afectar la audición y provocar fatiga o irritabilidad.</p>
+                </div>
+                <div class="tarjeta highlight">
+                    <h3>Espacios sin auriculares</h3>
+                    <p>Reducir el tiempo de aislamiento ayuda a mantener la conexión con el entorno, las personas y la rutina diaria.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="mini-titulo">4. Usa la música como herramienta, no como escapatoria</h2>
+            <div class="lista-rapida">
+                <div class="check">
+                    <strong>Para estudiar</strong>
+                    El instrumental o lo-fi puede apoyar la concentración y la calma durante tareas largas.
+                </div>
+                <div class="check">
+                    <strong>Para relajarse</strong>
+                    Algunos géneros ayudan a bajar el ritmo cardiaco y regular la ansiedad.
+                    <br>
+                    <a href="https://open.spotify.com/playlist/29nPMwMfVGUeZCBpBUVpjK?utm_source=generator&si=f9fd31a29ad94031" target="_blank" rel="noopener" style="color: #93c5fd; font-weight: 700;">Playlist recomendada: Lo-fi / Clásica</a>
+                </div>
+                <div class="check">
+                    <strong>Para motivarse</strong>
+                    Canciones con ritmo positivo pueden apoyar la energía y la confianza para afrontar el día.
+                </div>
+                <div class="check">
+                    <strong>Para procesar emociones</strong>
+                    La música puede ser un puente para hablar de tristeza, enojo o nervios sin imponer juicios.
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="mini-titulo">5. Señales de alerta</h2>
+            <div class="grid">
+                <div class="tarjeta warning">
+                    <h3>Dependencia emocional</h3>
+                    <p>Si la música se convierte en la única forma de regular emociones, puede limitar otras estrategias saludables.</p>
+                </div>
+                <div class="tarjeta warning">
+                    <h3>Aislamiento excesivo</h3>
+                    <p>Escuchar música por horas sin conexión con otras personas puede reforzar la sensación de soledad.</p>
+                </div>
+                <div class="tarjeta warning">
+                    <h3>Volumen alto prolongado</h3>
+                    <p>Esto puede afectar la audición y producir irritabilidad o cansancio emocional.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="mini-titulo">6. Recomendaciones prácticas para la familia</h2>
+            <div class="grid">
+                <div class="tarjeta">
+                    <h3>Fomenta la reflexión</h3>
+                    <p>Pregunta: “¿Qué te transmite esta canción?” Esto ayuda a convertir la música en una herramienta de autoconocimiento.</p>
+                </div>
+                <div class="tarjeta">
+                    <h3>Alterna géneros</h3>
+                    <p>La variedad musical amplía sensibilidad y evita quedarse solo con una energía emocional repetitiva.</p>
+                </div>
+                <div class="tarjeta">
+                    <h3>Da ejemplo</h3>
+                    <p>Cuando los adultos también usan la música con equilibrio y conciencia, los jóvenes reciben un modelo positivo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="mini-titulo">7. En resumen</h2>
+            <div class="tarjeta">
+                <p>La música puede acompañar el desarrollo emocional de los adolescentes de muchas formas: relajando, motivando, conectando y ayudando a expresarse. El objetivo no es prohibirla, sino acompañarla con criterio, empatía y límites claros.</p>
+                <p>Cuando se usa de forma consciente, la música puede convertirse en una aliada del bienestar, no en un factor de riesgo.</p>
+            </div>
+        </section>
+
+        <div class="acciones">
+            <a href="index.html" class="boton">Volver a la página principal</a>
+            <a href="index.html#generos" class="boton btn-secundario">Explorar géneros</a>
+        </div>
+    </div>
+</body>
+</html>

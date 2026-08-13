@@ -1,0 +1,842 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Música, Adolescentes y Salud Mental</title>
+    <style>
+        :root {
+            --color-principal: #ff4d8d;
+            --color-secundario: #111827;
+            --color-fondo: #070b14;
+            --color-texto: #f4f7fb;
+            --color-claro: #101827;
+            --color-alerta: #ff6b6b;
+            --color-acento: #4de2ff;
+            --sombra: 0 24px 60px rgba(0, 0, 0, 0.5);
+            --azul: #3b82f6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 77, 141, 0.22), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(77, 226, 255, 0.15), transparent 26%),
+                linear-gradient(180deg, #02070f 0%, #090d18 40%, #0d1322 100%);
+            color: var(--color-texto);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        a { color: inherit; }
+        .contenedor { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background: rgba(2, 6, 23, 0.82);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #ffd6e8;
+            text-decoration: none;
+            text-shadow: 0 0 18px rgba(255, 77, 141, 0.75);
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .menu a:hover {
+            color: #ffd6e8;
+            transform: translateY(-2px);
+            text-shadow: 0 0 12px rgba(255, 77, 141, 0.85);
+        }
+
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, rgba(10,15,26,0.82), rgba(13,19,34,0.72));
+            color: white;
+            padding: 130px 0 90px;
+            text-align: center;
+            box-shadow: inset 0 -40px 80px rgba(0, 0, 0, 0.35);
+            border-bottom: 2px solid rgba(255, 77, 141, 0.25);
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.28;
+            filter: brightness(0.7) saturate(1.2);
+            z-index: 0;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255, 77, 141, 0.18), transparent 40%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero .contenedor {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        .boton {
+            display: inline-block;
+            background: linear-gradient(90deg, #ff4d8d 0%, #4de2ff 100%);
+            color: #050b14;
+            padding: 15px 34px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 900;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 22px rgba(255, 77, 141, 0.35);
+        }
+
+        .boton:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 0 26px rgba(77, 226, 255, 0.5);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 7px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #e0f2fe;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .intro {
+            padding: 90px 0;
+        }
+
+        .card {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.86));
+            border: 1px solid rgba(147, 197, 253, 0.18);
+            border-radius: 20px;
+            padding: 26px 22px;
+            box-shadow: 0 20px 36px rgba(2, 6, 23, 0.24);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            overflow: hidden;
+            min-height: 190px;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,15,26,0.08), rgba(10,15,26,0.22));
+            pointer-events: none;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 77, 141, 0.45);
+        }
+
+        .tipo {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #93c5fd;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #f8fafc;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #dbeafe;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            margin-top: 18px;
+        }
+
+        .summary-item {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 22px 18px;
+        }
+
+        .summary-item h3 {
+            margin-bottom: 8px;
+            color: #ffd7ea;
+        }
+
+        .summary-item p {
+            color: #dbeafe;
+        }
+
+        section { padding: 90px 0; }
+        .titulo-seccion {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #ffd7ea;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 18px rgba(255, 77, 141, 0.45);
+        }
+
+        .subtitulo {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 50px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .section-block { margin-top: 32px; }
+        .mini-titulo {
+            color: #ff9ec5;
+            font-size: 1.7rem;
+            margin: 0 0 22px;
+            font-weight: 800;
+        }
+
+        .historia-timeline {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 12px;
+        }
+
+        .historia-timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(94, 234, 212, 0.9), rgba(147, 197, 253, 0.6), rgba(255, 77, 141, 0.18));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: calc(50% - 28px);
+            margin-bottom: 24px;
+        }
+
+        .timeline-item:nth-child(odd) { left: 0; }
+        .timeline-item:nth-child(even) { margin-left: 50%; }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            top: 26px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4d8d, #4de2ff);
+            box-shadow: 0 0 0 4px rgba(77, 226, 255, 0.12);
+        }
+
+        .timeline-item:nth-child(odd)::before { right: -36px; }
+        .timeline-item:nth-child(even)::before { left: -36px; }
+
+        .timeline-card {
+            background: rgba(15, 23, 42, 0.62);
+            border: 1px solid rgba(147, 197, 253, 0.18);
+            border-radius: 18px;
+            padding: 20px 20px 18px;
+            box-shadow: 0 14px 28px rgba(2, 6, 23, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #93c5fd;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .timeline-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            font-weight: 700;
+        }
+
+        .timeline-card p {
+            margin: 0;
+            color: #dbeafe;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .tarjeta, .paso, .genero {
+            height: 100%;
+        }
+
+        .tarjeta {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(22, 32, 52, 0.8) 100%);
+            padding: 28px 24px;
+            border-radius: 22px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            border: 1px solid rgba(255, 77, 141, 0.18);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            color: #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tarjeta::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff4d8d, #4de2ff, transparent);
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3), 0 0 24px rgba(255, 77, 141, 0.12);
+            border-color: rgba(77, 226, 255, 0.35);
+        }
+
+        .tarjeta h3 { color: #ddd6fe; margin-bottom: 12px; font-size: 1.25rem; font-weight: 700; }
+
+        #historia, #efectos, #fuentes { position: relative; overflow: hidden; }
+        #historia {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.18) 0%, rgba(2, 6, 23, 0.95) 100%);
+        }
+
+        #efectos {
+            position: relative;
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.8) 0%, rgba(15, 23, 42, 0.96) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        #efectos .video-fondo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.1;
+            filter: saturate(1.1) contrast(1.08);
+            z-index: 0;
+        }
+
+        #efectos .contenedor { position: relative; z-index: 1; }
+        .efecto-cita {
+            margin: 0 auto 26px;
+            max-width: 760px;
+            text-align: center;
+            color: #dbeafe;
+            font-size: 0.96rem;
+            line-height: 1.7;
+            opacity: 0.92;
+        }
+
+        .positivo { border-left: 3px solid #34d399; background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(17, 24, 39, 0.96)); }
+        .negativo { border-left: 3px solid var(--color-alerta); background: linear-gradient(135deg, rgba(255, 77, 109, 0.12), rgba(17, 24, 39, 0.96)); }
+
+        .alerta {
+            background: linear-gradient(135deg, rgba(255, 93, 115, 0.18) 0%, rgba(255, 93, 115, 0.08) 100%);
+            border: 1px solid rgba(255, 93, 115, 0.35);
+            border-left: 6px solid var(--color-alerta);
+            padding: 22px 26px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            color: #fef2f2;
+            box-shadow: 0 12px 28px rgba(255, 93, 115, 0.12);
+            font-weight: 600;
+        }
+
+        .genero {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.75));
+            padding: 26px 22px;
+            border-radius: 20px;
+            text-align: left;
+            color: #e5e7eb;
+            border: 1px solid rgba(77, 226, 255, 0.18);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.18);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .genero:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 77, 141, 0.4);
+        }
+
+        .genero h3 {
+            color: var(--color-principal);
+            margin-bottom: 10px;
+        }
+
+        .genero iframe {
+            width: 100%;
+            max-width: 100%;
+            margin-top: 14px;
+            border-radius: 12px;
+        }
+
+        .pasos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .paso {
+            background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+            padding: 28px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--sombra);
+            color: #e5e7eb;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .numero {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--color-principal);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .recursos {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.16) 0%, rgba(2, 6, 23, 0.96) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .recursos .contenedor > div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .recursos a {
+            display: inline-block;
+            margin: 6px 0;
+            padding: 13px 22px;
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 700;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.20);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+        }
+
+        .recursos a:hover {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .imagen-ejemplo {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px auto 0;
+            box-shadow: var(--sombra);
+        }
+
+        .salud-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+        }
+
+        .salud-tarjeta {
+            background: linear-gradient(145deg, #111827 0%, #1f2937 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 30px 24px;
+            box-shadow: var(--sombra);
+        }
+
+        .salud-tarjeta h3 { color: #bfdbfe; margin-bottom: 12px; }
+        .salud-tarjeta p { color: #e5e7eb; }
+
+        .guia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .guia-item {
+            background: rgba(15, 23, 42, 0.88);
+            border-radius: 24px;
+            padding: 28px 24px;
+            box-shadow: var(--sombra);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .guia-item h3 { color: #bfdbfe; margin-bottom: 12px; }
+        .guia-item p, .guia-item ul { color: #cbd5e1; }
+
+        .guia-item ul { margin-left: 18px; }
+
+        #fuentes {
+            background: rgba(2, 6, 23, 0.48);
+            padding-top: 60px;
+            padding-bottom: 90px;
+        }
+
+        .fuentes-detalle {
+            max-width: 960px;
+            margin: 0 auto;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            background: rgba(15, 23, 42, 0.38);
+            box-shadow: 0 14px 28px rgba(2, 6, 23, 0.12);
+            overflow: hidden;
+        }
+
+        .fuentes-detalle summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 12px 18px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #f8fafc;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .fuentes-detalle summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .fuentes-detalle summary:hover {
+            transform: translateY(-1px);
+            border-color: rgba(255, 77, 141, 0.4);
+            box-shadow: 0 12px 24px rgba(255, 77, 141, 0.08);
+        }
+
+        .fuentes-detalle[open] summary {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .fuentes-detalle .bibliografia {
+            padding: 18px 20px 14px;
+        }
+
+        .fuentes-detalle .bibliografia h3 {
+            margin-bottom: 10px;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #dbeafe;
+            font-weight: 700;
+        }
+
+        .fuentes-detalle .bibliografia ul {
+            margin-left: 16px;
+            font-size: 0.72rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        .fuentes-detalle .bibliografia li {
+            margin-bottom: 6px;
+            padding-left: 2px;
+        }
+
+        .fuentes-detalle .bibliografia a {
+            color: #bfdbfe;
+            text-decoration: none;
+        }
+
+        .fuentes-detalle .bibliografia a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: rgba(2, 6, 23, 0.95);
+            padding: 24px 0;
+            text-align: center;
+            color: #dbeafe;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 760px) {
+            .historia-timeline::before { left: 22px; transform: none; }
+            .timeline-item {
+                width: calc(100% - 40px);
+                margin-left: 40px;
+                margin-right: 0;
+            }
+            .timeline-item:nth-child(even) { margin-left: 40px; }
+            .timeline-item::before { left: -28px; right: auto; }
+            .menu { width: 100%; justify-content: center; }
+            .hero { padding: 100px 0 70px; }
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 70px 0; }
+            .grid, .pasos, .salud-grid, .guia-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="contenedor">
+            <nav>
+                <a href="index.html" class="logo">Música & Salud Mental</a>
+                <div class="menu">
+                    <a href="efectos.html">Efectos</a>
+                    <a href="salud-mental.html">Salud mental</a>
+                    <a href="generos.html">Géneros</a>
+                    <a href="consejos.html">Consejos</a>
+                    <a href="guia-padres.html">Guía para padres</a>
+                    <a href="recursos.html">Recursos</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video class="hero-video" src="./luces.mp4" autoplay muted loop playsinline></video>
+        <div class="contenedor">
+            <span class="eyebrow">Proyecto educativo</span>
+            <h1>Música, adolescentes y salud mental</h1>
+            <p>La música influye en las emociones, la identidad y el bienestar de los jóvenes. Esta página funciona como inicio y cada tema está separado en su propia sección o archivo.</p>
+            <a href="#temas" class="boton">Ver temas</a>
+        </div>
+    </section>
+
+    <section class="intro" id="temas">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Temas principales</h2>
+            <p class="subtitulo">Cada bloque queda separado para que la información sea clara, ordenada y más profesional.</p>
+
+            <div class="grid">
+                <a class="card" href="#historia">
+                    <span class="tipo">Tema</span>
+                    <h3>Historia</h3>
+                    <p>Recorrido de la música y su vínculo con la cultura y la experiencia humana.</p>
+                </a>
+
+                <a class="card" href="efectos.html">
+                    <span class="tipo">Sección</span>
+                    <h3>Efectos de la música</h3>
+                    <p>Qué influye en el ánimo, la identidad y la regulación emocional de los adolescentes.</p>
+                </a>
+
+                <a class="card" href="salud-mental.html">
+                    <span class="tipo">Sección</span>
+                    <h3>Salud mental</h3>
+                    <p>Cómo la música puede ayudar a reducir el estrés y apoyar una mejor regulación emocional.</p>
+                </a>
+
+                <a class="card" href="generos.html">
+                    <span class="tipo">Sección</span>
+                    <h3>Géneros musicales</h3>
+                    <p>Explora los estilos más escuchados y cómo cada uno puede afectar la experiencia juvenil.</p>
+                </a>
+
+                <a class="card" href="consejos.html">
+                    <span class="tipo">Sección</span>
+                    <h3>Consejos</h3>
+                    <p>Recomendaciones prácticas para un consumo más saludable, consciente y equilibrado.</p>
+                </a>
+
+                <a class="card" href="guia-padres.html">
+                    <span class="tipo">Sección</span>
+                    <h3>Guía para padres</h3>
+                    <p>Ideas para acompañar a los adolescentes y orientar un uso más responsable de la música.</p>
+                </a>
+
+                <a class="card" href="recursos.html">
+                    <span class="tipo">Sección</span>
+                    <h3>Recursos</h3>
+                    <p>Enlaces y materiales útiles para seguir aprendiendo sobre el tema.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="historia">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Historia de la música</h2>
+            <p class="subtitulo">Un eje central para entender cómo la música ha evolucionado, influido en la cultura y acompañado el desarrollo humano a lo largo del tiempo.</p>
+
+            <div class="historia-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Prehistoria</div>
+                        <h3>Ritmos primitivos</h3>
+                        <p>La música nace con flautas de hueso, percusiones y ritmos rituales ligados a la comunidad, la celebración y la espiritualidad.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Antigüedad</div>
+                        <h3>Egipto, Grecia y Roma</h3>
+                        <p>En estas civilizaciones la música se vinculó con la religión, la filosofía, el teatro y las matemáticas, consolidando su valor cultural.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Edad Media</div>
+                        <h3>Canto sagrado</h3>
+                        <p>Se impone el canto gregoriano y, más adelante, la polifonía, transformando la música en una forma de expresión litúrgica y estructural.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Renacimiento</div>
+                        <h3>Expansión y riqueza</h3>
+                        <p>Se desarrollan la polifonía vocal, la música instrumental y nuevas formas de composición, ampliando su alcance artístico.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Barroco y Clasicismo</div>
+                        <h3>Forma y expresión</h3>
+                        <p>Nacen la ópera, la sinfonía y el equilibrio formal con figuras como Bach, Mozart y Beethoven, que marcan la tradición occidental.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <div class="timeline-year">Romanticismo y actualidad</div>
+                        <h3>Emoción y diversidad</h3>
+                        <p>El Romanticismo intensifica la expresividad emocional y, en la actualidad, la música se diversifica en jazz, rock, pop, electrónica y globalización.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fuentes">
+        <div class="contenedor">
+            <h2 class="titulo-seccion">Fuentes</h2>
+            <p class="subtitulo">Referencias consultadas para apoyar la información del proyecto.</p>
+
+            <details class="fuentes-detalle">
+                <summary>Ver todas las fuentes</summary>
+                <div class="bibliografia">
+                    <h3>Bibliografía y referencias</h3>
+                    <ul>
+                        <li>World Health Organization (WHO). <em>Health topics: Mental health</em>. Organización Mundial de la Salud.</li>
+                        <li>UNICEF. <em>Adolescents, mental health and well-being</em>. Fondo de las Naciones Unidas para la Infancia.</li>
+                        <li>American Psychological Association (APA). <em>Music and emotional well-being</em>. Asociación de Psicología Americana.</li>
+                        <li>UNESCO. <em>Culture and arts education</em>. Organización de las Naciones Unidas para la Educación, la Ciencia y la Cultura.</li>
+                        <li>Hargreaves, D. J., Miell, D., & MacDonald, R. (2013). <em>Musical Identities</em>. Oxford University Press.</li>
+                        <li>North, A. C., & Hargreaves, D. J. (2008). <em>The social and applied psychology of music</em>. Oxford University Press.</li>
+                        <li>European Commission. <em>Health and well-being of adolescents</em>. European Union resources and public health publications.</li>
+                        <li>Centers for Disease Control and Prevention (CDC). <em>Adolescent mental health and well-being</em>. U.S. Department of Health and Human Services.</li>
+                        <li>National Institute of Mental Health (NIMH). <em>Children and adolescents: mental health information</em>. National Institutes of Health.</li>
+                        <li>National Alliance on Mental Illness (NAMI). <em>Adolescent mental health</em>. National Alliance on Mental Illness.</li>
+                        <li>American Academy of Pediatrics. <em>Screen time, music and emotional regulation in adolescence</em>. Pediatric guidelines and reports.</li>
+                        <li>Jensen, F. E. (2015). <em>The Teenage Brain</em>. HarperCollins.</li>
+                        <li>Suzanne C. et al. (2021). <em>Music Therapy and Emotional Regulation in Youth</em>. Journal of Music Therapy and Psychology.</li>
+                        <li>Patel, A. D. (2014). <em>Music, Language, and the Brain</em>. Oxford University Press.</li>
+                        <li>Levitin, D. J. (2012). <em>This Is Your Brain on Music</em>. Dutton.</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contenedor">
+            <p>© 2026 Música, Adolescentes y Salud Mental</p>
+        </div>
+    </footer>
+</body>
+</html>
